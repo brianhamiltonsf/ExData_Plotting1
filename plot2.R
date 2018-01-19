@@ -1,5 +1,7 @@
 library(lubridate)
-data <- read.table("./data/household_power_consumption.txt", header = TRUE, sep=";", na.strings = "?", stringsAsFactors = FALSE)
+temp <- tempfile()
+download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", temp)
+data <- read.table(unz(temp, "household_power_consumption.txt"), header = TRUE, sep=";", na.strings = "?", stringsAsFactors = FALSE)
 data$Date <- dmy(data$Date)
 data <- subset(data, data$Date >= "2007-02-01" & data$Date <= "2007-02-02")
 par(bg = "white")
